@@ -1,5 +1,8 @@
-template/
 .vs
+template/
 Backend/backend.sln
+frontend/.vite/
+frontend/.env
+frontend/src/assets/
 sass-styles/
 node_modules/

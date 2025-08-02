@@ -1,9 +1,9 @@
-using backend.Services;
+using Backend.Services;
 using Microsoft.AspNetCore.Mvc;
-using backend.Models;
+using Backend.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace backend.Controllers
+namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/comment")]

@@ -1,8 +1,8 @@
-using backend.Data;
-using backend.Models;
-using backend.Utilities;
+using Backend.Data;
+using Backend.Models;
+using Backend.Utilities;
 
-namespace backend.Services
+namespace Backend.Services
 {
     public class ImageService : Service
     {

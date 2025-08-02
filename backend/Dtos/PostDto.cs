@@ -1,4 +1,4 @@
-namespace backend.Dtos
+namespace Backend.Dtos
 {
     public class PostDto
     {

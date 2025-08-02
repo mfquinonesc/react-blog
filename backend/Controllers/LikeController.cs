@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using backend.Services;
-using backend.Models;
+using Backend.Services;
+using Backend.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace backend.Controllers
+namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/like")]

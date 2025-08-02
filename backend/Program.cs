@@ -1,8 +1,8 @@
-using backend.Services;
+using Backend.Services;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
-using backend.Data;
+using Backend.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSqlServer<BlogReactDbContext>(builder.Configuration.GetConnectionString("BlogReactDb"));
 
 // Json web token Authentication
-
-
 string key = builder.Configuration["JwtSettings:Secret"];
 
 builder.Services.AddSingleton<JwtService>();
@@ -37,9 +35,7 @@ builder.Services.AddCors(options => {
 });
 
 
-
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

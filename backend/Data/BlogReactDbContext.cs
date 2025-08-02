@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using backend.Models;
+using Backend.Models;
 
-namespace backend.Data
+namespace Backend.Data
 {
     public partial class BlogReactDbContext : DbContext
     {

@@ -1,9 +1,9 @@
-using backend.Services;
-using backend.Dtos;
+using Backend.Services;
+using Backend.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
-namespace backend.Controllers
+namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/post")]

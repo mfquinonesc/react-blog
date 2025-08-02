@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace backend.Services
+namespace Backend.Services
 {
     public class JwtService
     {
@@ -35,6 +35,6 @@ namespace backend.Services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
+       
     }
 }

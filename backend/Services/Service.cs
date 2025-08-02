@@ -1,6 +1,6 @@
-using backend.Data;
+using Backend.Data;
 
-namespace backend.Services
+namespace Backend.Services
 {
     public class Service
     {

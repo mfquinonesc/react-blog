@@ -1,10 +1,10 @@
-using backend.Models;
-using backend.Dtos;
-using backend.Services;
+using Backend.Models;
+using Backend.Dtos;
+using Backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
-namespace backend.Controllers
+namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/user")]

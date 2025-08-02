@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.StaticFiles;
 
-namespace backend.Utilities
+namespace Backend.Utilities
 {
     public class FileHandler
     {

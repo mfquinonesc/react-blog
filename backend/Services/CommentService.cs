@@ -1,7 +1,7 @@
-using backend.Data;
-using backend.Models;
+using Backend.Data;
+using Backend.Models;
 
-namespace backend.Services
+namespace Backend.Services
 {
     public class CommentService : Service, IService<Comment>
     {
