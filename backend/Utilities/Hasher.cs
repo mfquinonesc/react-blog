@@ -2,7 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace backend.Utilities
+namespace Backend.Utilities
 {
    public class Hasher
    {

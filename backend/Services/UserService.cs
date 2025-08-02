@@ -1,10 +1,10 @@
 using System.Text.RegularExpressions;
-using backend.Data;
-using backend.Dtos;
-using backend.Models;
-using backend.Utilities;
+using Backend.Data;
+using Backend.Dtos;
+using Backend.Models;
+using Backend.Utilities;
 
-namespace backend.Services
+namespace Backend.Services
 {
     public class UserService : Service, IService<UserDto>
     {
@@ -26,17 +26,17 @@ namespace backend.Services
                 return new { status = false, message = "The birthday date has to be at least 18 years ago", dto };
 
             if (string.IsNullOrEmpty(dto.Password) || string.IsNullOrEmpty(dto.Lastname) || string.IsNullOrEmpty(dto.Name))
-                return new { status = false, message = "All fields are required: password, name and lastname", dto };
+                return new { status = false, message = "All these fields are required: password, name and lastname", dto };
 
-            if (!_context.Rols.Any(r=> r.RolId == dto.RolId))
+            if (!_context.Rols.Any(r => r.RolId == dto.RolId))
                 return new { status = false, message = $"The rol {dto.RolId} is not valid", dto };
 
-            if(dto.Password.Length < 8 || !Regex.IsMatch(dto.Password, @"[A-Za-z]") || !Regex.IsMatch(dto.Password, @"\d"))
-                return new { status = false, message = "The password has to have at least one letter, one number and 8 symbols", dto };
+            if (dto.Password.Length < 8 || !Regex.IsMatch(dto.Password, @"[A-Za-z]") || !Regex.IsMatch(dto.Password, @"\d"))
+                return new { status = false, message = "The password must have at least one letter, one number and 8 characters", dto };
 
-            if(dto.Password.Contains(' '))
+            if (dto.Password.Contains(' '))
                 return new { status = false, message = "The password can not contain white spaces", dto };
-            
+
             dto.Password = Hasher.HashPassword(dto.Password);
             User user = MapperHelper.Map<UserDto, User>(dto);
 
@@ -58,12 +58,12 @@ namespace backend.Services
             var user = _context.Users.Where(u => u.Email == login.Email).FirstOrDefault();
 
             if (user == null)
-                return new { status = false, message = $"The email {login.Email} is not registered" };
+                return new { status = false, message = $"The email {login.Email} is incorret" };
 
             if (user.Attempts >= attemps)
                 return new { status = false, message = $"Your account has been banned due to multiple failed attempts" };
 
-            if (Hasher.VerifyPassword(login.Password,user.Password))
+            if (Hasher.VerifyPassword(login.Password, user.Password))
             {
                 user.Attempts = 0;
                 user.LastAccess = DateTime.Now;
@@ -71,6 +71,7 @@ namespace backend.Services
                 _context.Users.Update(user);
                 _context.SaveChanges();
 
+                //user.UserId = 0;
                 user.Password = "";
                 string token = _service.GenerateToken(user.Email, user.UserId);
 
@@ -144,5 +145,31 @@ namespace backend.Services
 
             return new { users };
         }
-    }
+
+        public dynamic Demo()
+        {
+            var user = _context.Users.Where(u => u.UserId == 1).FirstOrDefault();
+            bool status = user != null;
+
+            if (status)
+            {
+                user.Attempts = 0;
+                user.LastAccess = DateTime.Now;               
+
+                string password = Guid.NewGuid().ToString("N");
+                user.Password = Hasher.HashPassword(password);
+                
+                _context.Users.Update(user);
+                _context.SaveChanges();
+
+                //user.UserId = 0;
+                user.Password = "";
+                string token = _service.GenerateToken(user.Email, user.UserId);
+
+                return new { status = true, message = "Ok", user, token };
+            }
+
+            return new { status, message = "There is no available user for demos" };
+        }
+    }   
 }

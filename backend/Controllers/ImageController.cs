@@ -1,10 +1,10 @@
-using backend.Models;
-using backend.Services;
-using backend.Utilities;
+using Backend.Models;
+using Backend.Services;
+using Backend.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace backend.Controllers
+namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/image")]

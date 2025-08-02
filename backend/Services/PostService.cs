@@ -1,8 +1,9 @@
-using backend.Data;
-using backend.Models;
-using backend.Dtos;
+using Backend.Data;
+using Backend.Models;
+using Backend.Dtos;
+using Backend.Utilities;
 
-namespace backend.Services
+namespace Backend.Services
 {
     public class PostService : Service, IService<PostDto>
     {
