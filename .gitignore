@@ -1,0 +1,5 @@
+template/
+.vs
+Backend/backend.sln
+sass-styles/
+node_modules/
