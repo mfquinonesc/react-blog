@@ -1,4 +1,3 @@
-# react-blog
 # Blog Platform
 
 A blog platform that allows users to create, read, update, and delete posts. It supports user authentication, image uploads, and comment systems.
