@@ -6,3 +6,4 @@ frontend/.env
 frontend/src/assets/
 sass-styles/
 node_modules/
+react-blog.sln

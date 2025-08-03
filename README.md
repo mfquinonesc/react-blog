@@ -30,3 +30,13 @@ A blog platform that allows users to create, read, update, and delete posts. It 
 
 
 ## Project Structure
+
+## Environment Variables
+
+### Frontend
+
+Create a `.env` file in the root directory of the project `frontend/`:
+
+```env
+VITE_API_URL=https://localhost:7184/
+```
