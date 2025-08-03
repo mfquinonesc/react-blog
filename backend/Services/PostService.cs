@@ -70,7 +70,7 @@ namespace Backend.Services
         public dynamic GetById(int id)
         {
             List<Post> post = _context.Posts.Where(p => p.PostId == id).ToList();
-            var dto = this.GetPostDtos(post);
+            var dto = this.GetDetailedPosts(post);
 
             return new { post = dto };
         }
@@ -78,7 +78,7 @@ namespace Backend.Services
         public dynamic GetByUserId(int userId)
         {
             List<Post> posts = _context.Posts.Where(p => p.UserId == userId).OrderBy(p => p.CreatedAt).ToList();
-            var dtos = this.GetPostDtos(posts, userId);
+            var dtos = this.GetDetailedPosts(posts, userId);
 
             return new { posts = dtos };
         }
@@ -86,7 +86,7 @@ namespace Backend.Services
         public dynamic GetAll()
         {
             List<Post> posts = _context.Posts.OrderBy(p => p.CreatedAt).ToList();
-            var dtos = this.GetPostDtos(posts);
+            var dtos = this.GetDetailedPosts(posts);
 
             return new { posts = dtos };
         }
@@ -151,7 +151,7 @@ namespace Backend.Services
             _context.SaveChanges();
         }
 
-        private dynamic GetPostDtos(List<Post> posts, int userId = 0)
+        private dynamic GetDetailedPosts(List<Post> posts, int userId = 0)
         {
             List<int> postIds = posts.Select(p => p.PostId).ToList();
 
@@ -160,33 +160,42 @@ namespace Backend.Services
             var postCategories = _context.PostCategories.Where(pc => postIds.Contains(pc.PostId)).ToList();
             var comments = _context.Comments.Where(c => postIds.Contains(c.PostId)).ToList();
             var categories = _context.Categories.Where(c => postCategories.Select(pc => pc.CategoryId).Contains(c.CategoryId)).ToList();
+            var authors = _context.Users.Select(u => new { u.Name, u.Lastname, u.RolId, u.UserId }).ToList();
 
-            List<dynamic> dtos = new();
+            List<dynamic> detailedPosts = new();
 
             posts.ForEach(post =>
-            {
-                var image = images.Where(i => i.PostId == post.PostId).FirstOrDefault();
-
+            { 
                 var postCategoryIds = postCategories.Where(pc => pc.PostId == post.PostId).Select(pc => pc.CategoryId).ToList();
 
                 var categoriesList = categories.Where(c => postCategoryIds.Contains(c.CategoryId)).Select(c => new { c.Name, c.CategoryId }).ToList();
 
                 var postLikes = likes.Where(l => l.PostId == post.PostId).ToList();
 
-                var postLike = postLikes.Where(l => l.UserId == userId).FirstOrDefault();
+                var like = postLikes.Where(l => l.UserId == userId).FirstOrDefault() != null;
 
                 var postComments = comments.Where(c => c.PostId == post.PostId).ToList();
+
+                List<dynamic> authoredComments = new();
+
+                postComments.ForEach(pc=>
+                {
+                    var commentAuthor = authors.Where(a => a.UserId == pc.UserId).FirstOrDefault();
+                    authoredComments.Add(new { comment = pc, author = commentAuthor });
+                });
 
                 PostDto dto = MapperHelper.Map<Post, PostDto>(post);
 
                 dto.CategoryIds = postCategoryIds;
 
-                var data = new { post = dto, image, categoriesList, likes = postLikes.Count, like = postLike, comments = postComments };
+                var author = authors.Where(a => a.UserId == post.UserId).FirstOrDefault();
 
-                dtos.Add(data);
+                var data = new { post = dto, images, categoriesList, likes = postLikes.Count, like, comments = authoredComments, author };
+
+                detailedPosts.Add(data);
             });
 
-            return dtos;
+            return detailedPosts;
         }
 
     }
