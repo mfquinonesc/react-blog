@@ -1,0 +1,18 @@
+:root {
+    --bulma-primary-h: 267deg;
+    --bulma-primary-s: 39%;
+    --bulma-primary-l: 46%;
+
+    --bulma-link-h: 229deg;
+    --bulma-link-s: 76%;
+    --bulma-link-l: 66%;   
+
+    --blog-color-primary: hsl(var(--bulma-primary-h) var(--bulma-primary-s) var(--bulma-primary-l));
+    --blog-color-link: hsl(var(--bulma-link-h) var(--bulma-link-s) var(--bulma-link-l));   
+}   
+
+.is-secundary{
+    background: linear-gradient(135deg, var(--blog-color-primary), var(--blog-color-primary));   
+}
+
+

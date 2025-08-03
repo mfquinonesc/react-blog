@@ -1,0 +1,43 @@
+.slider-component {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  cursor: default;
+}
+.slider-component div {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+.slider-component div figure {
+  min-width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+.slider-component div figure img {
+  border-radius: 0.75rem;
+}
+.slider-component button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  color: #FFF;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 0.25rem solid #FFF;
+  font-size: 1rem;
+  display: none;
+  transition: all 1.5s ease;
+}
+.slider-component button:first-of-type {
+  left: 0.5rem;
+}
+.slider-component button:last-of-type {
+  right: 0.5rem;
+}
+
+.slider-component:hover button {
+  background-color: rgba(255, 255, 255, 0.2823529412);
+  display: inline;
+}

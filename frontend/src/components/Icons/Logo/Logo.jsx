@@ -1,0 +1,18 @@
+import useIconColor from "../../../hooks/useIconColor";
+
+export default function Logo({ defaultColor = true ,backgroundColor = null, fillColor = null, width = '100%', height = 'fit-content' }) {
+ 
+  const { background, fill } = useIconColor( defaultColor, backgroundColor, fillColor);
+ 
+  return (
+    <div  style={{ backgroundColor: background, width: width, height: height }}>
+      <svg viewBox="0 0 80 75.60440762247563">
+        <g transform="translate(-1.7001177822828968, -3.8980425986436975) scale(0.8687653001596474)" fill={fill}>
+            <path xmlns="http://www.w3.org/2000/svg"
+                d="M28.036,91.512c-0.38,0-0.764-0.104-1.096-0.324c-0.708-0.467-1.048-1.332-0.844-2.155l3.552-14.353H15.872  c-0.944,0-1.764-0.656-1.956-1.584L2,16.368c-0.116-0.556,0.004-1.132,0.34-1.588c0.332-0.456,0.84-0.752,1.404-0.813L91.828,4.5  c0.607-0.072,1.22,0.156,1.648,0.592c0.428,0.436,0.631,1.056,0.547,1.66l-7.836,58.191c-0.136,0.992-0.979,1.736-1.983,1.736  H61.216L29.256,91.1C28.892,91.376,28.464,91.512,28.036,91.512L28.036,91.512z">
+            </path>
+        </g>
+      </svg>      
+    </div>
+  );
+}

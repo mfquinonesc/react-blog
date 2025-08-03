@@ -1,0 +1,18 @@
+.blog-guard-loader{
+ animation: beat 1s infinite ease-in-out;
+}
+
+@keyframes beat {
+  0%, 100% {
+    transform: scale(0.7);
+  }
+  25% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(0.8);
+  }
+}
