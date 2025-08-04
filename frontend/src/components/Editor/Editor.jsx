@@ -99,7 +99,7 @@ export default function Editor({open=false, comment=false, onClose}){
                         <p className="control">
                             <a className="button is-small is-primary has-text-white">
                                 <span className="icon mr-1">
-                                    <i class="fa-solid fa-images"></i>
+                                    <i className="fa-solid fa-images"></i>
                                 </span>
                                 Add image
                             </a>

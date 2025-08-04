@@ -1,36 +1,56 @@
 import MainLogo from "../../components/icons/MainLogo/MainLogo";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useUser } from "../../contexts/UserContext";
 import { toUpperFirst } from "../../utilities/utils";
 import useAuthorization from "../../hooks/useAuthorization";
+import { getIsMobile } from "../../hooks/useScreenSize";
+import Searcher from "../../components/Searcher/Searcher";
 
-export default function Header({onEdit}) {
+export default function Header({ onEdit, onSearch, onSearchActive, showButton = undefined }) {
 
     const navigate  = useNavigate();
     const { logout, user } = useUser();
     const [isActive, setIsActive] = useState(false);
     const [searchField, setSearchField] = useState(false);
-    const { admin } = useAuthorization(user);
+    const { admin, edition } = useAuthorization(user);
+    const [searchQuery,  setSearchQuery] = useState('');
+
+    const isMobile = getIsMobile();
+  
+    useEffect(()=>{       
+        onSearch?.(searchQuery);      
+    },[searchQuery]);  
+
+    useEffect(()=>{ 
+        onSearchActive?.(isMobile && searchField);        
+    }, [searchField]);
    
+    useEffect(()=>{
+       setSearchField(showButton ?? false);
+    },[showButton])
+
     const signOut = () =>{
         logout();
         navigate('/login');
     }
 
-    const toggle = ()=>{
+    const toggleNavbar = ()=>{
         setIsActive(!isActive);
     }
 
-    const toggleSearch =()=>{
+    const toggleSearch =()=>{     
+        setSearchQuery('');      
         setSearchField(!searchField);
+        setIsActive(false);       
     }
 
-    const open = ()=>{
+    const openEditor = ()=>{
         if(onEdit){
             onEdit(true);
-        }            
-    }   
+        }
+        setIsActive(false);          
+    }
 
     return (
         <header className="navbar is-fixed-top has-background-text-90">
@@ -40,7 +60,7 @@ export default function Header({onEdit}) {
                     <a className="navbar-item pt-3">
                         <MainLogo width={"6rem"} />
                     </a>
-                    <span className={`navbar-burger ${isActive ? "is-active" : "" }`} data-target="navbarMenuHeroC" onClick={()=> toggle()}>
+                    <span className={`navbar-burger ${isActive ? "is-active" : "" }`} data-target="navbarMenuHeroC" onClick={()=> toggleNavbar()}>
                         <span></span>
                         <span></span>
                         <span></span>
@@ -51,22 +71,8 @@ export default function Header({onEdit}) {
                 <div id="navbarMenuHeroC" className={`navbar-menu ${isActive ? "is-active" : "" }`}>
                     <div className="navbar-end">
 
-                        {searchField && <span className="navbar-item">
-                            <div className="field has-addons">                                                                         
-                                <p className="control  is-expanded has-icons-left is-small">
-                                    <input className="input is-small is-primary" type="text" placeholder="Search"/>                                    
-                                    <span className="icon is-small is-left has-text-primary">
-                                        <i className="fa-solid fa-magnifying-glass"></i>
-                                    </span>
-                                </p>
-                                <p className="control is-small">
-                                    <a className="button is-small is-primary" onClick={()=>toggleSearch()}>
-                                        <span className="icon has-text-white">
-                                            <i className="fa-solid fa-xmark"></i>
-                                        </span>
-                                    </a>
-                                </p>
-                            </div>                    
+                        {searchField && !isMobile && <span className="navbar-item">
+                            <Searcher onChange={(q)=> setSearchQuery(q)}  onClose={(e)=>toggleSearch()} />                            
                         </span>}                          
 
                         {!searchField && <span className="navbar-item">                            
@@ -87,14 +93,14 @@ export default function Header({onEdit}) {
                             </a>
                         </span>}  
                         
-                        <span className="navbar-item">
-                            <a className="has-text-primary" onClick={()=> open() }>
+                        {edition && <span className="navbar-item">
+                            <a className="has-text-primary" onClick={()=> openEditor() }>
                                 <span className="icon  mr-1">
                                    <i className="fa-solid fa-circle-plus"></i>
                                 </span>
                                 New
                             </a>
-                        </span>
+                        </span>}
 
                         <span className="navbar-item is-hoverable">
                             <a className="has-text-primary" style={{ border: 'none' }}>
@@ -105,19 +111,19 @@ export default function Header({onEdit}) {
                             </a>
                             <div className="navbar-dropdown">                          
                                 <a className="navbar-item has-text-primary">
-                                    <span className="icon has-text-primary">
+                                    <span className="icon has-text-primary mr-1">
                                         <i className="fa-solid fa-user-lock"></i>
                                     </span>
                                     Account
                                 </a>                              
                                 <a className="navbar-item has-text-primary"> 
-                                    <span className="icon has-text-primary">
+                                    <span className="icon has-text-primary mr-1">
                                        <i className="fa-solid fa-gear"></i> 
                                     </span>
                                     Settings                                     
                                 </a> 
                                 <a className="navbar-item has-text-primary" onClick={()=> signOut()}>
-                                    <span className="icon has-text-primary">
+                                    <span className="icon has-text-primary mr-1">
                                         <i className="fa-solid fa-arrow-right-from-bracket"></i>
                                     </span>
                                     Sign out

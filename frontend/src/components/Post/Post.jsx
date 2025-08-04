@@ -54,8 +54,8 @@ export default function PostPreview({ post, preview = false, onComment }){
                 <p>{preview? trucateWords(post.post.content, WORD_LIMIT) : post.post.content }</p>             
 
                 {preview && <button className="button is-primary has-text-white is-small">
-                    <span class="icon mr-1">
-                       <i class="fas fa-angle-double-right"></i>
+                    <span className="icon mr-1">
+                       <i className="fas fa-angle-double-right"></i>
                     </span>
                     Continue reading
                 </button>}                
