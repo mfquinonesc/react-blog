@@ -15,9 +15,9 @@ export default function Comment({ comment, user}) {
             </p>
         </figure>
         <div>
-            <p className="has-text-primary has-text-weight-semibold">{`${toUpperFirst(comment.user.name)} ${toUpperFirst(comment.user.lastname)}`}</p>
-            <p className="has-text-black has-text-weight-semibold">{comment.user.rol.name}</p>
-            <p className="has-text-text has-text-weight-semibold">{formatDate(comment.createdAt)}</p>
+            <p className="has-text-primary has-text-weight-semibold">{`${toUpperFirst(comment.author.name)} ${toUpperFirst(comment.author.lastname)}`}</p>
+            <p className="has-text-black has-text-weight-semibold">{comment.author?.rol?.name ?? 'Unknown'}</p>
+            <p className="has-text-text has-text-weight-semibold">{formatDate(comment.comment.createdAt)}</p>
         </div>
         <div>
             {edition&&<a className="icon mr-2 has-text-primary">
@@ -28,7 +28,7 @@ export default function Comment({ comment, user}) {
             </a>}
         </div>
       </div>
-      <p>{comment.content}</p>
+      <p>{comment.comment.content}</p>
     </article>
   );
 }

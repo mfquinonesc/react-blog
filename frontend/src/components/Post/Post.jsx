@@ -11,7 +11,7 @@ export default function PostPreview({ post, preview = false, onComment }){
     const { user } = useUser();
     const { edition } = useAuthorization(user);
 
-    const images = post.image && post.image.length > 0;
+    const images = post.images && post.images.length > 0;
 
     const comment = ()=>{
         if(onComment){
@@ -20,9 +20,9 @@ export default function PostPreview({ post, preview = false, onComment }){
     }
    
     return(
-    <article className="mb-6">
+    <article className="mb-0">
 
-        {images&&<Slider images={post.image}></Slider>}
+        {images&&<Slider images={post.images}></Slider>}
 
         <div className={`media-content ${images?'mt-3':''}`} >
 
@@ -70,7 +70,9 @@ export default function PostPreview({ post, preview = false, onComment }){
             }
         </section>} 
 
-        {!preview&&<button className="button is-primary has-text-white mt-4 is-small" onClick={()=>comment()}>Comment</button>}    
+        {!preview&&<button className="button is-primary has-text-white mt-4 is-small" onClick={()=>comment()}>Comment</button>}
+
+        <hr /> 
 
     </article>
     );
