@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useParams,  useNavigate, useLocation } from "react-router-dom";
 
 import Header from "../../layouts/Header/Header";
 import Footer from "../../layouts/Footer/Footer";
@@ -16,23 +17,40 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState(posts);
   const [searchField, setSearchField] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [preview, setPreview] = useState(true);
 
   const { user } = useUser();
   const { edition } = useAuthorization(user);
+  const navigate = useNavigate();
+  const { postId } = useParams();
+  const location = useLocation();
 
   useEffect(()=>{
     const getPosts = async () => {
-      const result = await postService.getAll();
-      const list = result.data.posts;
+      setIsLoading(true);
+      const result = postId? await postService.get(postId): await postService.getAll();   
+      const list = postId ? [result.data.post] : result.data.posts;
       setPosts(list);
-      setFilteredPosts(list); 
+      setFilteredPosts(list);
+      setIsLoading(false);
+      setPreview(!postId);
     }
     getPosts();
-  },[]);  
+  },[location]);  
 
   const openEditor = (value, comment = false) => {
     setComment(comment);
     setOpen(value);
+  }
+
+  const readPost = (id) => {
+    const post = posts.filter((p) => { return p.post.postId == id });
+    if (post) {
+      setFilteredPosts(post);
+      navigate(`/posts/${id}`);
+      setPreview(false);
+    }
   }
 
   const searchPost = (query) => {   
@@ -55,7 +73,7 @@ export default function Home() {
       });
 
       setFilteredPosts(list);
-      return
+      return;
     }
 
     setFilteredPosts(posts);
@@ -70,30 +88,39 @@ export default function Home() {
 
           <main className="column is-8">
 
-            {searchField && <div className="mb-5">
-              <Searcher onChange={(q)=> searchPost(q)} onClose={(e)=>setSearchField(false)}/>
-            </div>}            
+            {isLoading && <div className="is-flex is-flex-direction-row is-justify-content-center mb-5">
+              <a className="button is-loading is-large" style={{border:'none'}}></a>
+            </div>}
 
-            {(posts.length == 0)&&<article className="mb-6 is-flex is-flex-direction-row is-justify-content-space-between">
-              <div className="ml-5">                  
-                <h2 className="title is-size-4 mb-3 has-text-primary has-text-weight-semibold">No posts yet</h2>
-                <p> 
-                  It looks like there are no posts. 
-                    {edition&&<span className="ml-1">Why not write your first one?  
-                      <a className="icon has-text-primary ml-1" onClick={()=>openEditor(true)}>
+            {!isLoading && <>
+
+              {searchField && <div className="mb-5">
+                <Searcher onChange={(q) => searchPost(q)} onClose={(e) => setSearchField(false)} />
+              </div>}
+
+              {(posts.length == 0) && <article className="mb-6 is-flex is-flex-direction-row is-justify-content-space-between">
+                <div className="ml-5">
+                  <h2 className="title is-size-4 mb-3 has-text-primary has-text-weight-semibold">No posts yet</h2>
+                  <p>
+                    It looks like there are no posts.
+                    {edition && <span className="ml-1">Why not write your first one?
+                      <a className="icon has-text-primary ml-1" onClick={() => openEditor(true)}>
                         <i className="fa-solid fa-pencil"></i>
                       </a>
-                    </span>}                     
-                </p>           
-              </div>
-            </article>}
+                    </span>}
+                  </p>
+                </div>
+              </article>}
 
-            {filteredPosts.map((p,ind)=> {
-              return (
-                <Post key={ind} post={p} preview={true} onComment={(val)=>openEditor(val,true)}></Post>
+              {filteredPosts.map((p, ind) => {
+                return (
+                  <Post key={ind} post={p} preview={preview} onComment={(val) => openEditor(val, true)} onReading={(id) => readPost(id)}></Post>
+                )
+              }
               )}
-            )} 
-            
+
+            </>}
+                       
           </main>
             
           <aside  className="column is-4"> 

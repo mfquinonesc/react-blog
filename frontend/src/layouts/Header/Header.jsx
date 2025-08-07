@@ -57,7 +57,7 @@ export default function Header({ onEdit, onSearch, onSearchActive, showButton = 
             <div className="container">
 
                 <div className="navbar-brand">
-                    <a className="navbar-item pt-3">
+                    <a className="navbar-item pt-3" onClick={(e)=>navigate('/')}>
                         <MainLogo width={"6rem"} />
                     </a>
                     <span className={`navbar-burger ${isActive ? "is-active" : "" }`} data-target="navbarMenuHeroC" onClick={()=> toggleNavbar()}>

@@ -4,7 +4,7 @@ import { toUpperFirst, formatDate, trucateWords } from "../../utilities/utils";
 import { useUser } from "../../contexts/UserContext";
 import useAuthorization from "../../hooks/useAuthorization";
 
-export default function PostPreview({ post, preview = false, onComment }){  
+export default function PostPreview({ post, preview = false, onComment, onReading }){  
     
     const WORD_LIMIT = 40;
 
@@ -12,13 +12,7 @@ export default function PostPreview({ post, preview = false, onComment }){
     const { edition } = useAuthorization(user);
 
     const images = post.images && post.images.length > 0;
-
-    const comment = ()=>{
-        if(onComment){
-            onComment(true);
-        }
-    }
-   
+    
     return(
     <article className="mb-0">
 
@@ -53,7 +47,7 @@ export default function PostPreview({ post, preview = false, onComment }){
 
                 <p>{preview? trucateWords(post.post.content, WORD_LIMIT) : post.post.content }</p>             
 
-                {preview && <button className="button is-primary has-text-white is-small">
+                {preview && <button className="button is-primary has-text-white is-small" onClick={(e)=>onReading?.(post.post.postId)}>
                     <span className="icon mr-1">
                        <i className="fas fa-angle-double-right"></i>
                     </span>
@@ -70,7 +64,7 @@ export default function PostPreview({ post, preview = false, onComment }){
             }
         </section>} 
 
-        {!preview&&<button className="button is-primary has-text-white mt-4 is-small" onClick={()=>comment()}>Comment</button>}
+        {!preview&&<button className="button is-primary has-text-white mt-4 is-small" onClick={(e)=>onComment?.(true)}>Comment</button>}
 
         <hr /> 
 

@@ -12,7 +12,7 @@ export default function Router() {
         <Route path="/" element={<Guard element={<Home />} />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/posts" element={<Login />}></Route>
+        <Route path="/posts/:postId" element={<Guard element={<Home />} />}></Route>
         <Route path="/about" element={<Login />}></Route>     
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
