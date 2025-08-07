@@ -26,18 +26,21 @@ export default function Home() {
   const { postId } = useParams();
   const location = useLocation();
 
-  useEffect(()=>{
+  useEffect(() => {
     const getPosts = async () => {
+      if (postId && isNaN(Number(postId)))
+        return navigate('*');
+
       setIsLoading(true);
-      const result = postId? await postService.get(postId): await postService.getAll();   
-      const list = postId ? [result.data.post] : result.data.posts;
+      const result = postId ? await postService.get(postId) : await postService.getAll();
+      const list = postId ? result.data.post : result.data.posts;
       setPosts(list);
       setFilteredPosts(list);
       setIsLoading(false);
       setPreview(!postId);
     }
     getPosts();
-  },[location]);  
+  }, [location]);  
 
   const openEditor = (value, comment = false) => {
     setComment(comment);
@@ -79,6 +82,8 @@ export default function Home() {
     setFilteredPosts(posts);
   }
 
+  const notFound = postId && !isNaN(Number(postId));
+
   return (
     <>
       <Header onEdit={(val)=>openEditor(val)} onSearch={(q)=> searchPost(q)} onSearchActive={(e)=>setSearchField(e)} showButton={searchField}></Header>
@@ -100,15 +105,26 @@ export default function Home() {
 
               {(posts.length == 0) && <article className="mb-6 is-flex is-flex-direction-row is-justify-content-space-between">
                 <div className="ml-5">
-                  <h2 className="title is-size-4 mb-3 has-text-primary has-text-weight-semibold">No posts yet</h2>
-                  <p>
-                    It looks like there are no posts.
-                    {edition && <span className="ml-1">Why not write your first one?
-                      <a className="icon has-text-primary ml-1" onClick={() => openEditor(true)}>
-                        <i className="fa-solid fa-pencil"></i>
-                      </a>
-                    </span>}
-                  </p>
+                  <h2 className="title is-size-4 mb-3 has-text-primary has-text-weight-semibold">
+                    {notFound ? 'The post you’re looking for doesn’t exist' : 'Nothing here… yet!'}
+                  </h2>
+                  {notFound ? (
+                    <p>
+                      It might have been removed or never existed.
+                      Head back to the home page to explore other posts.
+                      <a className="has-text-primary has-text-weight-semibold ml-1" onClick={() => navigate('/')}>Go to Home</a>
+                    </p>
+                  ) : (
+                    <p>
+                      It looks like there are no posts.
+                      {edition && <span className="ml-1">Be the first to share your thoughts!
+                        <a className="has-text-primary has-text-weight-semibold ml-1" onClick={() => openEditor(true)}>Write your first post</a>
+                        <a className="icon has-text-primary ml-1" onClick={() => openEditor(true)}>
+                          <i className="fa-solid fa-pencil"></i>
+                        </a>
+                      </span>}
+                    </p>
+                  )}
                 </div>
               </article>}
 

@@ -14,60 +14,57 @@ export default function PostPreview({ post, preview = false, onComment, onReadin
     const images = post.images && post.images.length > 0;
     
     return(
-    <article className="mb-0">
+        <article className="mb-0">
 
-        {images&&<Slider images={post.images}></Slider>}
+            {images && <Slider images={post.images}></Slider>}
 
-        <div className={`media-content ${images?'mt-3':''}`} >
+            <div className={`media-content ${images ? 'mt-3' : ''}`} >
 
-            <h2 className="title is-size-4 mb-3 has-text-primary has-text-weight-semibold">{post.post.title}</h2>
+                <h2 className="title is-size-4 mb-3 has-text-primary has-text-weight-semibold">{post.post.title}</h2>
 
-            <div className="content">
+                <div className="content">
 
-                <p className="has-text-text">
-                    <span className="mr-5">
-                        <i className="fa-solid fa-user has-text-primary mr-2"></i>
-                        { post.author? `${toUpperFirst(post.author.name)} ${toUpperFirst(post.author.lastname)}`:'Unknown' }
-                    </span>
-                    <span className="mr-5">
-                        <i className="fa-solid fa-calendar-week has-text-primary mr-2"></i>
-                        {formatDate(post.post.createdAt)}
-                    </span>
-                    <span className="mr-5">
-                        <i className="fa-solid fa-comment has-text-primary mr-2"></i>
-                        {post.comments.length}
-                    </span>
-                    <span className="mr-5">
-                        <a className="icon">                            
-                            <i className={`fa-solid fa-heart mr-2 ${post.like?'has-text-primary':'has-text-grey-light'}`}></i>
-                        </a>                       
-                        {post.likes}
-                    </span>
-                </p>
+                    <p className="has-text-text">
+                        <span className="mr-5">
+                            <i className="fa-solid fa-user has-text-primary mr-2"></i>
+                            {post.author ? `${toUpperFirst(post.author.name)} ${toUpperFirst(post.author.lastname)}` : 'Unknown'}
+                        </span>
+                        <span className="mr-5">
+                            <i className="fa-solid fa-calendar-week has-text-primary mr-2"></i>
+                            {formatDate(post.post.createdAt)}
+                        </span>
+                        <span className="mr-5">
+                            <i className="fa-solid fa-comment has-text-primary mr-2"></i>
+                            {post.comments.length}
+                        </span>
+                        <span className="mr-5">
+                            <a className="icon">
+                                <i className={`fa-solid fa-heart mr-2 ${post.like ? 'has-text-primary' : 'has-text-grey-light'}`}></i>
+                            </a>
+                            {post.likes}
+                        </span>
+                    </p>
 
-                <p>{preview? trucateWords(post.post.content, WORD_LIMIT) : post.post.content }</p>             
+                    <p>{preview ? trucateWords(post.post.content, WORD_LIMIT) : post.post.content}</p>
 
-                {preview && <button className="button is-primary has-text-white is-small" onClick={(e)=>onReading?.(post.post.postId)}>
-                    <span className="icon mr-1">
-                       <i className="fas fa-angle-double-right"></i>
-                    </span>
-                    Continue reading
-                </button>}                
-                
+                    {preview && <button className="button is-primary has-text-white is-small" onClick={(e) => onReading?.(post.post.postId)}>
+                        Continue reading
+                    </button>}
+
+                </div>
+
             </div>
 
-        </div>
+            {!preview && <section className="is-flex is-flex-direction-column is-justity-content-start">
+                {
+                    post.comments.map((c, i) => { return <Comment key={i} comment={c} currentUserId={user.userId} /> })
+                }
+            </section>}
 
-        {!preview && <section className="is-flex is-flex-direction-column is-justity-content-start">
-            {
-                post.comments.map((c,i)=>{ return <Comment key={i} comment={c} currentUserId={user.userId}/>})
-            }
-        </section>} 
+            {!preview && <button className="button is-primary has-text-white mt-4 is-small" onClick={(e) => onComment?.(true)}>Comment</button>}
 
-        {!preview&&<button className="button is-primary has-text-white mt-4 is-small" onClick={(e)=>onComment?.(true)}>Comment</button>}
+            <hr />
 
-        <hr /> 
-
-    </article>
+        </article>
     );
 }   
