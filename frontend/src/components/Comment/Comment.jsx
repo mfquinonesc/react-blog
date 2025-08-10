@@ -1,6 +1,7 @@
 import "./Comment.css";
-import { toUpperFirst, formatDate } from "../../utilities/utils";
 import useAuthorization from "../../hooks/useAuthorization";
+import SummaryInfo from "../SummaryInfo/SummaryInfo";
+import ToolBar from "../ToolBar/ToolBar";
 
 export default function Comment({ comment, user}) {
 
@@ -8,26 +9,8 @@ export default function Comment({ comment, user}) {
     
     return (
     <article className="comment-component">
-      <div>
-        <figure className="media-left">
-            <p className="image is-64x64">
-            <img className="is-rounded" src="https://bulma.io/assets/images/placeholders/96x96.png" />
-            </p>
-        </figure>
-        <div>
-            <p className="has-text-primary has-text-weight-semibold">{`${toUpperFirst(comment.author.name)} ${toUpperFirst(comment.author.lastname)}`}</p>
-            <p className="has-text-black has-text-weight-semibold">{comment.author?.rol?.name ?? 'Unknown'}</p>
-            <p className="has-text-text has-text-weight-semibold">{formatDate(comment.comment.createdAt)}</p>
-        </div>
-        <div>
-            {edition&&<a className="icon mr-2 has-text-primary">
-                <i className="fa-solid fa-pen-to-square"></i>
-            </a>}
-            {edition&&<a className="icon has-text-primary">
-                <i className="fa-solid fa-trash-can"></i>
-            </a>}
-        </div>
-      </div>
+      <ToolBar position={{ top: '0.5rem', right: '0.5rem' }} />
+      <SummaryInfo title={`${comment.author.name} ${comment.author.lastname}`} subtitle={comment.author?.rol?.name ?? 'Unknown'} date={comment.comment.createdAt}/>  
       <p>{comment.comment.content}</p>
     </article>
   );

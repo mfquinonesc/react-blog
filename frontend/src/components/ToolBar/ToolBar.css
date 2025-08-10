@@ -1,0 +1,22 @@
+.tool-bar-component {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+  width: 2rem;
+}
+.tool-bar-component li a {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: background-color 0.65s ease;
+}
+.tool-bar-component li a:hover {
+  background-color: var(--color-focus);
+}

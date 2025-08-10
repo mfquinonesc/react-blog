@@ -1,0 +1,28 @@
+.category-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.375rem;
+}
+.category-component h3 {
+  width: 100%;
+  border: 1px solid transparent;
+  transition: all 0.65s ease;
+  border-radius: 0.375rem;
+}
+.category-component h3 a {
+  padding: 0 2rem;
+  margin: 0;
+}
+.category-component h3:hover, .category-component .is-selected {
+  background-color: var(--color-focus);
+}
+.category-component ul {
+  margin-left: 2rem;
+  border-left: 2px solid var(--color-primary);
+}
+.category-component ul li {
+  padding-left: 1rem;
+  font-size: 0.825rem;
+}

@@ -19,7 +19,7 @@
   transform: translate(-50%, -50%);
 }
 .calendar-component .calendar-component-header {
-  background-color: var(--blog-color-primary);
+  background-color: var(--color-primary);
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
   display: flex;
@@ -73,7 +73,7 @@
   transition: all 0.65s ease;
 }
 .calendar-component .calendar-component-container ul li a:hover {
-  color: var(--blog-color-primary);
+  color: var(--color-primary);
 }
 .calendar-component .calendar-component-container table {
   width: 100%;
@@ -107,7 +107,7 @@
 }
 .calendar-component .calendar-component-container table tbody td a:hover,
 .calendar-component .calendar-component-container table tbody td .is-selected {
-  background-color: var(--blog-color-primary);
+  background-color: var(--color-primary);
   color: #FFF !important;
 }
 .calendar-component .calendar-component-container .dates-table thead th,
@@ -121,7 +121,7 @@
   margin: 0.25rem;
 }
 .calendar-component .calendar-component-container .dates-table thead th {
-  color: var(--blog-color-primary);
+  color: var(--color-primary);
   font-size: 0.5rem;
 }
 .calendar-component .calendar-component-container .dates-table tbody td {
@@ -168,7 +168,7 @@
   transition: all 0.65s ease;
 }
 .calendar-component .calendar-component-footer a:hover {
-  color: var(--blog-color-primary);
+  color: var(--color-primary);
 }
 
 .is-active {

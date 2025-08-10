@@ -9,6 +9,8 @@ import  postService  from "../../services/postService";
 import { useUser } from "../../contexts/UserContext";
 import useAuthorization from "../../hooks/useAuthorization";
 import Searcher from "../../components/Searcher/Searcher";
+import Category from "../../components/Category/Category";
+import PopularPosts from "../../components/PopularPosts/PopularPosts";
 
 export default function Home() {   
 
@@ -139,8 +141,9 @@ export default function Home() {
                        
           </main>
             
-          <aside  className="column is-4"> 
-            {/* Here comes the lateral content */}
+          <aside  className="column is-4">             
+            <PopularPosts></PopularPosts>
+            <Category></Category>   
           </aside>
 
         </div>         

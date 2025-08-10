@@ -7,12 +7,12 @@
     --bulma-link-s: 76%;
     --bulma-link-l: 66%;   
 
-    --blog-color-primary: hsl(var(--bulma-primary-h) var(--bulma-primary-s) var(--bulma-primary-l));
-    --blog-color-link: hsl(var(--bulma-link-h) var(--bulma-link-s) var(--bulma-link-l));   
+    --color-primary: hsl(var(--bulma-primary-h) var(--bulma-primary-s) var(--bulma-primary-l));
+    --color-link: hsl(var(--bulma-link-h) var(--bulma-link-s) var(--bulma-link-l));
+    --color-focus: hsl(217.5,14.3%,89%);
 }   
 
 .is-secundary{
-    background: linear-gradient(135deg, var(--blog-color-primary), var(--blog-color-primary));   
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary));   
 }
-
 

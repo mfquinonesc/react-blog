@@ -5,7 +5,7 @@ export default function useIconColor(defaultColor, backgroundColor, fillColor) {
 
     if (defaultColor) {
         const rootStyles = window.getComputedStyle(document.documentElement);
-        const color = rootStyles.getPropertyValue("--blog-color-primary").trim();       
+        const color = rootStyles.getPropertyValue("--color-primary").trim();       
         fill = color;
         background = 'transparent';
     }

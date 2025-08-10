@@ -1,0 +1,16 @@
+.summary-info-component {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+.summary-info-component a,
+.summary-info-component p,
+.summary-info-component h3,
+.summary-info-component h4,
+.summary-info-component figcaption {
+  font-size: 0.825rem;
+}
