@@ -3,17 +3,17 @@ import { formatDate, formatText } from "../../utilities/utils";
 import defaultImage from "../../assets/images/96x96.png";
 import { useState, useEffect } from 'react';
 
-export default function SummaryInfo({ title, date, images:imageUrls, subtitle = undefined, onClick = undefined }) {
+export default function SummaryInfo({ title, subtitle, date, text, images: gallery, onClick }) {
 
     const [images, setImages] = useState([]);
     const [index, setIndex] = useState(0);
 
     useEffect(() => {
-        if (imageUrls?.length > 0) {
-            setImages(imageUrls);
-            setIndex(Math.floor(Math.random() * imageUrls.length));
+        if (gallery?.length > 0) {
+            setImages(gallery);
+            setIndex(Math.floor(Math.random() * gallery.length));
         }
-    }, [imageUrls]);
+    }, [gallery]);
   
     return (
         <div className="summary-info-component">
@@ -23,11 +23,12 @@ export default function SummaryInfo({ title, date, images:imageUrls, subtitle = 
                 </a>
             </figure>
             <div>
-                <h3>
+                {title && <h3>
                     <a className="has-text-primary has-text-weight-semibold" onClick={(e) => onClick?.(e)}>{formatText(title)}</a>
-                </h3>
+                </h3>}
                 {subtitle && <h4 className="has-text-black has-text-weight-semibold">{formatText(subtitle)}</h4>}
-                <p className="has-text-text has-text-weight-semibold">{formatDate(date)}</p>
+                {date && <p className="has-text-text has-text-weight-semibold">{formatDate(date)}</p>}
+                {text && <p className="has-text-text has-text-weight-semibold">{formatText(text)}</p>}
             </div>
         </div>)
 }

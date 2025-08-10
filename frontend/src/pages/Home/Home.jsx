@@ -11,6 +11,7 @@ import useAuthorization from "../../hooks/useAuthorization";
 import Searcher from "../../components/Searcher/Searcher";
 import Category from "../../components/Category/Category";
 import PopularPosts from "../../components/PopularPosts/PopularPosts";
+import AboutAuthor from "../../components/AboutAuthor/AboutAuthor";
 
 export default function Home() {   
 
@@ -30,16 +31,19 @@ export default function Home() {
 
   useEffect(() => {
     const getPosts = async () => {
+
+      window.scrollTo({  top: 0,  behavior: 'smooth'});
+
       if (postId && isNaN(Number(postId)))
         return navigate('*');
 
+      setPreview(!postId);
       setIsLoading(true);
       const result = postId ? await postService.get(postId) : await postService.getAll();
       const list = postId ? result.data.post : result.data.posts;
       setPosts(list);
       setFilteredPosts(list);
-      setIsLoading(false);
-      setPreview(!postId);
+      setIsLoading(false);     
     }
     getPosts();
   }, [location]);  
@@ -142,8 +146,14 @@ export default function Home() {
           </main>
             
           <aside  className="column is-4">             
-            <PopularPosts></PopularPosts>
-            <Category></Category>   
+           
+            {!preview && <AboutAuthor postId={postId}></AboutAuthor>}
+
+            {preview && <>
+              <PopularPosts></PopularPosts>
+              <Category></Category>
+            </>}
+
           </aside>
 
         </div>         
