@@ -23,4 +23,11 @@ const trucateWords = (text, wordLimit) => {
     return newText + (newText.endsWith('.') ? '' : '...');
 }
 
-export { toUpperFirst, formatDate, trucateWords }
+const formatText = (text) => {
+    return text.split(' ').map(word => {
+        const capitalCount = (word.match(/[A-Z]/g) || []).length;
+        return capitalCount > 0 ? word : toUpperFirst(word);
+    }).join(' ');
+}
+
+export { toUpperFirst, formatDate, trucateWords, formatText }

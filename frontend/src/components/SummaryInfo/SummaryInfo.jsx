@@ -1,5 +1,5 @@
 import './SummaryInfo.css';
-import { formatDate, toUpperFirst } from "../../utilities/utils";
+import { formatDate, formatText } from "../../utilities/utils";
 import defaultImage from "../../assets/images/96x96.png";
 import { useState, useEffect } from 'react';
 
@@ -14,11 +14,7 @@ export default function SummaryInfo({ title, date, images:imageUrls, subtitle = 
             setIndex(Math.floor(Math.random() * imageUrls.length));
         }
     }, [imageUrls]);
-
-    const formatText = (text) => {
-        return text.split(' ').map(s => { return toUpperFirst(s) }).join(' ');
-    }
-
+  
     return (
         <div className="summary-info-component">
             <figure className="media-left">
