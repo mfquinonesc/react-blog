@@ -19,7 +19,8 @@ const trucateWords = (text, wordLimit) => {
     if(words <= wordLimit)
         return text;
 
-    return words.slice(0, wordLimit).join(' ') + '...';    
+    const newText = words.slice(0, wordLimit).join(' ');
+    return newText + (newText.endsWith('.') ? '' : '...');
 }
 
 export { toUpperFirst, formatDate, trucateWords }
