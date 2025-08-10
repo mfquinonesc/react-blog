@@ -5,7 +5,7 @@ class CategoryService {
     path = '/api/category';
 
     create(category) {
-        return httpClient.category(this.path, category);
+        return httpClient.post(this.path, category);
     }
 
     update(category, categoryId) {
