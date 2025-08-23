@@ -7,6 +7,10 @@ class UserService {
     get(userId) {
         return httpClient.get(`${this.path}/${userId}`);
     }
+
+    getAll(){
+        return httpClient.get(this.path);
+    }
 }
 
 const userService = new UserService();

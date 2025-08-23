@@ -1,0 +1,31 @@
+
+.tab-layout-component {
+  border: 1px solid var(--color-focus);
+  width: 100%;
+  height: calc(85vh - 4rem);
+  max-height: calc(85vh - 4rem);
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+  overflow-y: auto;
+  background-color: transparent;
+  padding: 0;
+}
+
+.tab-layout-component::-webkit-scrollbar {
+  width: 0.25rem;
+  height: 1rem;
+}
+
+.tab-layout-component::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tab-layout-component::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+
+.tab-layout-component::-webkit-scrollbar-thumb:hover {
+  background: var(--color-focus);
+}

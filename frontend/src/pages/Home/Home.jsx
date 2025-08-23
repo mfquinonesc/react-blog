@@ -12,6 +12,7 @@ import Searcher from "../../components/Searcher/Searcher";
 import Category from "../../components/Category/Category";
 import PopularPosts from "../../components/PopularPosts/PopularPosts";
 import AboutAuthor from "../../components/AboutAuthor/AboutAuthor";
+import Loader from "../../components/Loader/Loader";
 
 export default function Home() {   
 
@@ -99,9 +100,7 @@ export default function Home() {
 
           <main className="column is-8">
 
-            {isLoading && <div className="is-flex is-flex-direction-row is-justify-content-center mb-5">
-              <a className="button is-loading is-large" style={{border:'none'}}></a>
-            </div>}
+            {isLoading && <Loader></Loader>}
 
             {!isLoading && <>
 

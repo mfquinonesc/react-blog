@@ -85,7 +85,7 @@ export default function Header({ onEdit, onSearch, onSearchActive, showButton = 
                         </span>}
 
                         {admin && <span className="navbar-item">
-                            <a className="has-text-primary">
+                            <a className="has-text-primary" onClick={()=> navigate('/admin')}>
                                 <span className="icon  mr-1">
                                     <i className="fa-solid fa-key"></i>
                                 </span>
