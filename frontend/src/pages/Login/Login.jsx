@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import icon_google from "../../assets/images/icon_google.png";
+import Notification from "../../components/Notification/Notification";
 
 const schema = yup.object().shape({
   password: yup.string().required('Password is required'),
@@ -126,5 +127,8 @@ export default function Login() {
     );
   }
 
-  return <AuthLayout component={LoginForm}></AuthLayout>;
+  return(<>  
+    <AuthLayout component={LoginForm}></AuthLayout>
+    <Notification message={'Start Demo'} visible={true} color={false} time={10000} onClick={()=>submit()}></Notification>
+  </>) 
 }
