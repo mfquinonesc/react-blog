@@ -8,20 +8,20 @@ class CategoryService {
         return httpClient.post(this.path, category);
     }
 
-    update(category, categoryId) {
-        return httpClient.put(`${this.path}/${categoryId}`, category);
+    update(category, id) {
+        return httpClient.put(`${this.path}/${id}`, category);
     }
 
-    get(categoryId) {
-        return httpClient.get(`${this.path}/${categoryId}`);
+    get(id) {
+        return httpClient.get(`${this.path}/${id}`);
     }
 
     getAll() {
         return httpClient.get(this.path);
     }   
 
-    delete(categoryId) {
-        return httpClient.delete(`${this.path}/${categoryId}`);
+    delete(id) {
+        return httpClient.delete(`${this.path}/${id}`);
     }
 }
 

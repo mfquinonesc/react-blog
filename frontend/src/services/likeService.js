@@ -8,8 +8,8 @@ class LikeService {
         return httpClient.post(this.path, like);
     }
 
-    delete(likeId) {
-        return httpClient.delete(`${this.path}/${likeId}`);
+    delete(id) {
+        return httpClient.delete(`${this.path}/${id}`);
     }
 }
 

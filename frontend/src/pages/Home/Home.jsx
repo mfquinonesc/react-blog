@@ -13,6 +13,7 @@ import Category from "../../components/Category/Category";
 import PopularPosts from "../../components/PopularPosts/PopularPosts";
 import AboutAuthor from "../../components/AboutAuthor/AboutAuthor";
 import Loader from "../../components/Loader/Loader";
+import Notification from "../../components/Notification/Notification";
 
 export default function Home() {   
 
@@ -23,6 +24,7 @@ export default function Home() {
   const [searchField, setSearchField] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [preview, setPreview] = useState(true);
+  const [notify, setNotify] = useState(false);
 
   const { user } = useUser();
   const { edition } = useAuthorization(user);
@@ -87,6 +89,11 @@ export default function Home() {
     }
 
     setFilteredPosts(posts);
+  }
+
+  const publish = (obj) => {
+    navigate(`/posts/${obj['postId']}`);
+    setNotify(true);
   }
 
   const notFound = postId && !isNaN(Number(postId));
@@ -159,7 +166,8 @@ export default function Home() {
         
       </section>
       <Footer></Footer>
-      <Editor open={open} comment={comment} onClose={(val)=>openEditor(val)}></Editor>
+      <Editor open={open} comment={comment} onClose={(val)=>openEditor(val)} onPublish={(e)=>publish(e)}></Editor>
+      <Notification visible={notify} message={comment ? 'Comment published' : 'Post published'} onHide={(e)=>setNotify(e)}></Notification>
     </>
   );
 }

@@ -8,12 +8,12 @@ class PostService {
         return httpClient.post(this.path, post);
     }
 
-    update(post, postId) {
-        return httpClient.put(`${this.path}/${postId}`, post);
+    update(post, id) {
+        return httpClient.put(`${this.path}/${id}`, post);
     }
 
-    get(postId) {
-        return httpClient.get(`${this.path}/${postId}`);
+    get(id) {
+        return httpClient.get(`${this.path}/${id}`);
     }
 
     getAll() {
@@ -26,8 +26,8 @@ class PostService {
         });
     }
 
-    delete(postId) {
-        return httpClient.delete(`${this.path}/${postId}`);
+    delete(id) {
+        return httpClient.delete(`${this.path}/${id}`);
     }
 }
 
