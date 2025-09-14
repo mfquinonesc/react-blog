@@ -27,7 +27,7 @@ namespace Backend.Services
         {
             var like = _context.Likes.Where(l => l.LikeId == id).FirstOrDefault();
             bool status = like != null;
-            
+
             if (status)
             {
                 _context.Likes.Remove(like);
@@ -35,7 +35,18 @@ namespace Backend.Services
             }
 
             return new { status };
-        }        
-      
+        }
+
+        public dynamic GetAll()
+        {
+            List<Like> likes = _context.Likes.ToList();
+            return new { likes };
+        }
+
+        public dynamic GetById(int id)
+        {
+            var like = _context.Likes.Where(l => l.LikeId == id).FirstOrDefault();
+            return new { status = like != null, like };
+        }
     }
 }

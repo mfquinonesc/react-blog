@@ -8,7 +8,7 @@ namespace Backend.Controllers
     [ApiController]
     [Route("api/like")]
     [Authorize]
-    public class LikeController:ControllerBase
+    public class LikeController : ControllerBase
     {
         private readonly LikeService _service;
 
@@ -30,5 +30,17 @@ namespace Backend.Controllers
             return _service.Delete(id);
         }
 
+        [HttpGet]
+        [Route("{id}")]
+        public dynamic GetById(int id)
+        {
+            return _service.GetById(id);
+        }
+
+        [HttpGet]
+        public dynamic GetAll()
+        {
+            return _service.GetAll();
+        }
     }    
 }

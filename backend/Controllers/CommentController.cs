@@ -36,5 +36,18 @@ namespace Backend.Controllers
             return _service.Delete(id);
         }
 
+        [HttpGet]
+        [Route("{id}")]
+        public dynamic GetById(int id)
+        {
+            return _service.GetById(id);
+        }
+
+        [HttpGet]
+        public dynamic GetAll()
+        {
+            return _service.GetAll();
+        }
+
     }
 }
