@@ -49,6 +49,7 @@ builder.Services.AddScoped<LikeService>();
 builder.Services.AddScoped<ImageService>();
 builder.Services.AddScoped<CommentService>();
 builder.Services.AddScoped<CategoryService>();
+builder.Services.AddScoped<RolService>();
 
 
 var app = builder.Build();
