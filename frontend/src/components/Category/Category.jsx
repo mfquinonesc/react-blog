@@ -13,11 +13,11 @@ export default function Category() {
     useEffect(() => {
 
         const getCategory = async () => {
-            let result = await categoryService.getAll();
-            const categoryList = result.data?.categories.sort((a, b) => a.name.localeCompare(b.name)) ?? [];
+            const categoryResult = await categoryService.getAll();
+            const categoryList = categoryResult.data?.categories.sort((a, b) => a.name.localeCompare(b.name)) ?? [];
 
-            result = await postService.getAll();
-            const postList = result.data?.posts ?? [];
+            const postResult = await postService.getAll();
+            const postList = postResult.data?.posts ?? [];
 
             const postCategories = categoryList.map(c => {
                 const posts = postList.filter(p => { return p.categoriesList[0].categoryId == c.categoryId }).map(p => { return p.post });
@@ -31,7 +31,7 @@ export default function Category() {
     }, []);
 
     const toggle = (index) => {
-        setCategories(categories.map((c, i) => { return i === index ? { ...c, isActive: !c.isActive } : c }));
+        setCategories(categories.map((c, i) => { return  { ...c, isActive: i === index? !c.isActive : false }; }));
     }
 
     const getCategory = () => {

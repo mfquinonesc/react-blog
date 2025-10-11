@@ -10,16 +10,16 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-const schema = yup.object().shape({
-    name: yup.string().required('Name is required'),
-    lastName: yup.string().required('Lastname is required'),
-    email: yup.string().required('Email is required').email('Email is invalid'),
-    birthday: yup.string().required('Birthday is required'),
-    password: yup.string().required('Password is required').min(8, 'Password must have at least 8 characters'),
-    confirmPassword: yup.string().required('Confirm password is required').oneOf([yup.ref('password')], 'Passwords must match')
-});
-
 export default function Register() {
+
+    const schema = yup.object().shape({
+        name: yup.string().required('Name is required'),
+        lastName: yup.string().required('Lastname is required'),
+        email: yup.string().required('Email is required').email('Email is invalid'),
+        birthday: yup.string().required('Birthday is required'),
+        password: yup.string().required('Password is required').min(8, 'Password must have at least 8 characters'),
+        confirmPassword: yup.string().required('Confirm password is required').oneOf([yup.ref('password')], 'Passwords must match')
+    });
     
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState(null);

@@ -11,13 +11,13 @@ import * as yup from "yup";
 import icon_google from "../../assets/images/icon_google.png";
 import Notification from "../../components/Notification/Notification";
 
-const schema = yup.object().shape({
-  password: yup.string().required('Password is required'),
-  email: yup.string().required('Email is required').email('Email is invalid'),  
-})
-
 export default function Login() {
   
+  const schema = yup.object().shape({
+    password: yup.string().required('Password is required'),
+    email: yup.string().required('Email is required').email('Email is invalid'),
+  });
+
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState(null);
 

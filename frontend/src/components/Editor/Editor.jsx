@@ -110,10 +110,8 @@ export default function Editor({open=false, comment=false, onClose}){
                     </div>                
                 </>}               
                 
-                <div className="buttons is-justify-content-flex-end mt-2">
-                    <button className="button is-small is-primary has-text-white has-text-weight-semibold">Preview</button>
-                    <button className="button is-small is-primary has-text-white has-text-weight-semibold">Save draft</button>
-                    <button className="button is-small is-primary has-text-white has-text-weight-semibold">Publish</button>
+                <div className="buttons is-justify-content-flex-end mt-2">                    
+                    <button className="button is-small is-primary has-text-white has-text-weight-semibold">Save</button>
                     <button className="button is-small has-background-text-90 has-text-primary has-text-weight-semibold">Cancel</button>
                 </div>
 
