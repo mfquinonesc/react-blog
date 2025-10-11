@@ -11,6 +11,7 @@ import userService from "../../services/userService";
 import postService from "../../services/postService";
 import categoryService from "../../services/categoryService";
 import commentService from "../../services/commentService";
+import rolService from "../../services/rolService";
 
 
 export default function Admin() {
@@ -56,10 +57,21 @@ export default function Admin() {
         comments:{
             service: commentService,
             key: "comments",
-            mapper: (c) => ({               
+            mapper: (c) => ({    
+                label: c.content,
+                id: c.commentId,         
                 type: "comments",
             })
-        }       
+        },
+        rols:{
+            service: rolService,
+            key: "rols",
+            mapper: (c) => ({ 
+                label: c.name,
+                id: c.rolId,           
+                type: "rols",
+            })
+        }            
     };
 
     const getItems = async (arr) => {
