@@ -1,9 +1,10 @@
 using Backend.Data;
 using Backend.Models;
+using Backend.Services.Interfaces;
 
 namespace Backend.Services
 {
-    public class CommentService : Service, IService<Comment>
+    public class CommentService : Service, ICrudService<Comment>
     {
         public CommentService(BlogReactDbContext context) : base(context) { }
 

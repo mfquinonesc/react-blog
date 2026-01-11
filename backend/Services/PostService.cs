@@ -2,10 +2,11 @@ using Backend.Data;
 using Backend.Models;
 using Backend.Dtos;
 using Backend.Utilities;
+using Backend.Services.Interfaces;
 
 namespace Backend.Services
 {
-    public class PostService : Service, IService<PostDto>
+    public class PostService : Service, ICrudService<PostDto>
     {
         private readonly ImageService _imageService;
         public PostService(BlogReactDbContext context, ImageService imageService) : base(context)

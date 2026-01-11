@@ -2,11 +2,12 @@ using System.Text.RegularExpressions;
 using Backend.Data;
 using Backend.Dtos;
 using Backend.Models;
+using Backend.Services.Interfaces;
 using Backend.Utilities;
 
 namespace Backend.Services
 {
-    public class UserService : Service, IService<UserDto>
+    public class UserService : Service, ICrudService<UserDto>
     {
         private readonly JwtService _service;
         private readonly ImageService _imageService;

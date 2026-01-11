@@ -1,9 +1,10 @@
 using Backend.Data;
 using Backend.Models;
+using Backend.Services.Interfaces;
 
 namespace Backend.Services
 {
-    public class CategoryService : Service, IService<Category>
+    public class CategoryService : Service, ICrudService<Category>
     {
         public CategoryService(BlogReactDbContext context) : base(context) { }
 

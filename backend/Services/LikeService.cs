@@ -1,10 +1,11 @@
 using Backend.Data;
 using Backend.Models;
+using Backend.Services.Interfaces;
 
 
 namespace Backend.Services
 {
-    public class LikeService : Service
+    public class LikeService : Service, ICreateService<Like>, IReadService, IDeleteService
     {
         public LikeService(BlogReactDbContext context) : base(context) { }
 

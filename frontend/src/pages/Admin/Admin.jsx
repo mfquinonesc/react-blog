@@ -66,9 +66,9 @@ export default function Admin() {
         rols:{
             service: rolService,
             key: "rols",
-            mapper: (c) => ({ 
-                label: c.name,
-                id: c.rolId,           
+            mapper: (r) => ({ 
+                label: r.name,
+                id: r.rolId,           
                 type: "rols",
             })
         }            

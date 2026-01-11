@@ -1,10 +1,11 @@
 using Backend.Data;
 using Backend.Models;
+using Backend.Services.Interfaces;
 using Backend.Utilities;
 
 namespace Backend.Services
 {
-    public class ImageService : Service
+    public class ImageService : Service, ICreateService<Image>, IFindService
     {
         public ImageService(BlogReactDbContext context) : base(context) {}
 
